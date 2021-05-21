@@ -17,8 +17,12 @@
 #
 
 COMPATDIR=/lib/modules/$(KERNELVERSION_X86)/build/compat-wireless-3.2-rc1-1/include
+ifeq ($(CC),)
 CC=		$(CROSS_COMPILE)gcc -I$(COMPATDIR)
+endif
+ifeq ($(LD),)
 LD=		$(CROSS_COMPILE)ld
+endif
 BACKUP=		/root/backup
 YMD=		`date +%Y%m%d%H%M`
 
@@ -566,6 +570,10 @@ install: default
 	cp -f ../io/sdio/$(PLATFORM)/sdio.$(MODEXT) $(INSTALLDIR)
 	cp -f sd8xxx.$(MODEXT) $(INSTALLDIR)/sd8997$(DBG).$(MODEXT)
 	echo "sd8997 Driver Installed"
+
+modules_install:
+	@echo "kernel module install"
+	$(MAKE) INSTALL_MOD_STRIP=1 INSTALL_MOD_PATH=$(MODLIB) INSTALL_MOD_DIR=extra -C $(KERNELDIR) M=$(PWD) modules_install
 
 distclean:
 	-find . -name "*.o" -exec rm {} \;
