@@ -14,7 +14,6 @@ CONFIG_MARVELL_BT=y
 # Enable PC based Build support
 CONFIG_NONPLUG_SUPPORT=y
 
-CC=/usr/local/arm-marvell-krkwd-linux-gnueabi/gcc/bin/arm-none-linux-gnueabi-gcc
 APP=mfgbridge
 BINDIR=../bin_mfgbridge
 
@@ -30,7 +29,6 @@ endif
 
 
 ifeq ($(CONFIG_NONPLUG_SUPPORT), y)
-CC=gcc -g
 CFLAGS += -DNONPLUG_SUPPORT
 CPPFLAGS += -DNONPLUG_SUPPORT
 ifeq ($(CONFIG_MARVELL_BT),y)
