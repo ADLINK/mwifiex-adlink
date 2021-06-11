@@ -978,7 +978,7 @@ main(int argc, char *argv[])
     if (daemonize)
         daemon(1, 0);
 
-    if (brdg_parse_config(&Bridge, "bridge_init.conf") != 0) {
+    if (brdg_parse_config(&Bridge, "/etc/bridge_init.conf") != 0) {
         /* Failed to parse */
         return 0;
     }
